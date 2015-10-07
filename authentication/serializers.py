@@ -2,13 +2,14 @@ from django.contrib.auth import update_session_auth_hash
 from rest_framework import serializers
 from authentication.models import Account
 
+
 class AccountSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=False)
     confirm_password = serializers.CharField(write_only=True, required=False)
     #We don't want to update the user's password unless they provide a new one
     #write_only, the actual password won't be shown in the AJAX response
 
-    class Meta: #defines metadata the serializer requires to operate
+    class Meta: #defines the metadata the serializer requires to operate <- WHAT?
         model = Account
         #we specify which attributes of the Account model should be serialized:
         fields = ('id', 'email', 'username', 'created_at', 'updated_at', 'first_name',
